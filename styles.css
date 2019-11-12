@@ -1,0 +1,20 @@
+.verticalLayout > * {
+    display: block;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    white-space: pre;
+}
+
+#programInput {
+    height: 150px;
+}
+
+#output {
+    height: 400px;
+}

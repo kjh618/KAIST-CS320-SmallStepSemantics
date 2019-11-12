@@ -5,6 +5,6 @@
 /target/*
 !/target/scala-2.12/
 /target/scala-2.12/*
-!/target/scala-2.12/proof-tree-fastopt.js
+!/target/scala-2.12/small-step-semantics-fastopt.js
 
 /.idea/
