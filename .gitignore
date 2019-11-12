@@ -1,2 +1,10 @@
-*.class
-*.log
+/project/*
+!/project/build.properties
+!/project/plugins.sbt
+
+/target/*
+!/target/scala-2.12/
+/target/scala-2.12/*
+!/target/scala-2.12/proof-tree-fastopt.js
+
+/.idea/
