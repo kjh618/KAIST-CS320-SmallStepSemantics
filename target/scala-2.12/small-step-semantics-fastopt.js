@@ -1097,6 +1097,18 @@ function $isArrayOf_F1(obj, depth) {
 function $asArrayOf_F1(obj, depth) {
   return (($isArrayOf_F1(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.Function1;", depth))
 }
+function $is_Lsmallstepsemantics_Continuation(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lsmallstepsemantics_Continuation)))
+}
+function $as_Lsmallstepsemantics_Continuation(obj) {
+  return (($is_Lsmallstepsemantics_Continuation(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "smallstepsemantics.Continuation"))
+}
+function $isArrayOf_Lsmallstepsemantics_Continuation(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lsmallstepsemantics_Continuation)))
+}
+function $asArrayOf_Lsmallstepsemantics_Continuation(obj, depth) {
+  return (($isArrayOf_Lsmallstepsemantics_Continuation(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lsmallstepsemantics.Continuation;", depth))
+}
 function $is_Lsmallstepsemantics_Expression(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lsmallstepsemantics_Expression)))
 }
@@ -1619,139 +1631,219 @@ $c_Lsmallstepsemantics_Interpreter$.prototype.init___ = (function() {
   return this
 });
 $c_Lsmallstepsemantics_Interpreter$.prototype.run__T__T = (function(program) {
-  return this.interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value($m_Lsmallstepsemantics_ExpressionParser$().parse__T__Lsmallstepsemantics_Expression(program), new $c_Lsmallstepsemantics_Environment().init___sci_Map($as_sci_Map($m_s_Predef$().Map$2.apply__sc_Seq__sc_GenMap($m_sci_Nil$()))), new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(v$2) {
-      var v = $as_Lsmallstepsemantics_Value(v$2);
-      return v
-    })
-  })(this))).toString__T()
+  var expr = $m_Lsmallstepsemantics_ExpressionParser$().parse__T__Lsmallstepsemantics_Expression(program);
+  var x$22 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(expr, new $c_Lsmallstepsemantics_Environment().init___sci_Map($as_sci_Map($m_s_Predef$().Map$2.apply__sc_Seq__sc_GenMap($m_sci_Nil$()))));
+  var this$1 = $m_sci_Nil$();
+  return this.interpret__p1__sci_List__sci_List__Lsmallstepsemantics_Value(new $c_sci_$colon$colon().init___O__sci_List(x$22, this$1), $m_sci_Nil$()).toString__T()
 });
-$c_Lsmallstepsemantics_Interpreter$.prototype.interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value = (function(expr, env, k) {
+$c_Lsmallstepsemantics_Interpreter$.prototype.interpret__p1__sci_List__sci_List__Lsmallstepsemantics_Value = (function(contStack, valStack) {
   _interpret: while (true) {
-    var x1 = expr;
-    if ((x1 instanceof $c_Lsmallstepsemantics_Num)) {
-      var x2 = $as_Lsmallstepsemantics_Num(x1);
-      var num = x2.num$1;
-      return $as_Lsmallstepsemantics_Value(k.apply__O__O(new $c_Lsmallstepsemantics_NumVal().init___I(num)))
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_Add)) {
-      var x3 = $as_Lsmallstepsemantics_Add(x1);
-      var left = x3.left$1;
-      var right = x3.right$1;
-      var temp$k = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this, right$1, env$1, k$1) {
-        return (function(leftVal$2) {
-          var leftVal = $as_Lsmallstepsemantics_Value(leftVal$2);
-          return $m_Lsmallstepsemantics_Interpreter$().interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value(right$1, env$1, new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this$1, k$1$1, leftVal$1) {
-            return (function(rightVal$2) {
-              var rightVal = $as_Lsmallstepsemantics_Value(rightVal$2);
+    var x1 = contStack;
+    if ((x1 instanceof $c_sci_$colon$colon)) {
+      var x2 = $as_sci_$colon$colon(x1);
+      var curCont = $as_Lsmallstepsemantics_Continuation(x2.head$5);
+      var restConts = x2.tl$5;
+      if ((curCont instanceof $c_Lsmallstepsemantics_EvalCont)) {
+        var x2$2 = $as_Lsmallstepsemantics_EvalCont(curCont);
+        var expr = x2$2.expr$1;
+        var env = x2$2.env$1;
+        if ((expr instanceof $c_Lsmallstepsemantics_Num)) {
+          var x2$3 = $as_Lsmallstepsemantics_Num(expr);
+          var num = x2$3.num$1;
+          var x$1 = new $c_Lsmallstepsemantics_NumVal().init___I(num);
+          var this$1 = valStack;
+          var temp$valStack = new $c_sci_$colon$colon().init___O__sci_List(x$1, this$1);
+          contStack = restConts;
+          valStack = temp$valStack;
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_Add)) {
+          var x3 = $as_Lsmallstepsemantics_Add(expr);
+          var left = x3.left$1;
+          var right = x3.right$1;
+          var x$4 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(left, env);
+          var x$3 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(right, env);
+          var x$2 = $m_Lsmallstepsemantics_AddCont$();
+          var this$2 = new $c_sci_$colon$colon().init___O__sci_List(x$2, restConts);
+          var this$3 = new $c_sci_$colon$colon().init___O__sci_List(x$3, this$2);
+          contStack = new $c_sci_$colon$colon().init___O__sci_List(x$4, this$3);
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_Sub)) {
+          var x4 = $as_Lsmallstepsemantics_Sub(expr);
+          var left$2 = x4.left$1;
+          var right$2 = x4.right$1;
+          var x$7 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(left$2, env);
+          var x$6 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(right$2, env);
+          var x$5 = $m_Lsmallstepsemantics_SubCont$();
+          var this$4 = new $c_sci_$colon$colon().init___O__sci_List(x$5, restConts);
+          var this$5 = new $c_sci_$colon$colon().init___O__sci_List(x$6, this$4);
+          contStack = new $c_sci_$colon$colon().init___O__sci_List(x$7, this$5);
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_Id)) {
+          var x5 = $as_Lsmallstepsemantics_Id(expr);
+          var name = x5.name$1;
+          var x$8 = $as_Lsmallstepsemantics_Value(env.e$1.getOrElse__O__F0__O(name, new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function($this, name$1) {
+            return (function() {
+              $m_s_sys_package$().error__T__sr_Nothing$(("free identifier: " + name$1))
+            })
+          })(this, name))));
+          var this$6 = valStack;
+          var temp$valStack$2 = new $c_sci_$colon$colon().init___O__sci_List(x$8, this$6);
+          contStack = restConts;
+          valStack = temp$valStack$2;
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_Fun)) {
+          var x6 = $as_Lsmallstepsemantics_Fun(expr);
+          var param = x6.param$1;
+          var body = x6.body$1;
+          var x$9 = new $c_Lsmallstepsemantics_CloVal().init___T__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(param, body, env);
+          var this$7 = valStack;
+          var temp$valStack$3 = new $c_sci_$colon$colon().init___O__sci_List(x$9, this$7);
+          contStack = restConts;
+          valStack = temp$valStack$3;
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_App)) {
+          var x7 = $as_Lsmallstepsemantics_App(expr);
+          var fun = x7.fun$1;
+          var arg = x7.arg$1;
+          var x$12 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(fun, env);
+          var x$11 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(arg, env);
+          var x$10 = $m_Lsmallstepsemantics_AppCont$();
+          var this$8 = new $c_sci_$colon$colon().init___O__sci_List(x$10, restConts);
+          var this$9 = new $c_sci_$colon$colon().init___O__sci_List(x$11, this$8);
+          contStack = new $c_sci_$colon$colon().init___O__sci_List(x$12, this$9);
+          continue _interpret
+        } else if ((expr instanceof $c_Lsmallstepsemantics_Withcc)) {
+          var x8 = $as_Lsmallstepsemantics_Withcc(expr);
+          var name$2 = x8.name$1;
+          var body$2 = x8.body$1;
+          var jsx$1 = env.e$1;
+          var y = new $c_Lsmallstepsemantics_ContVal().init___sci_List__sci_List(restConts, valStack);
+          var x$13 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(body$2, new $c_Lsmallstepsemantics_Environment().init___sci_Map(jsx$1.$$plus__T2__sci_Map(new $c_T2().init___O__O(name$2, y))));
+          contStack = new $c_sci_$colon$colon().init___O__sci_List(x$13, restConts);
+          continue _interpret
+        } else {
+          throw new $c_s_MatchError().init___O(expr)
+        }
+      } else {
+        var x$14 = $m_Lsmallstepsemantics_AddCont$();
+        if ((x$14 === curCont)) {
+          var x1$4 = valStack;
+          if ((x1$4 instanceof $c_sci_$colon$colon)) {
+            var x2$4 = $as_sci_$colon$colon(x1$4);
+            var rightVal = $as_Lsmallstepsemantics_Value(x2$4.head$5);
+            var p3 = x2$4.tl$5;
+            if ((p3 instanceof $c_sci_$colon$colon)) {
+              var x4$2 = $as_sci_$colon$colon(p3);
+              var leftVal = $as_Lsmallstepsemantics_Value(x4$2.head$5);
+              var restVals = x4$2.tl$5;
               matchEnd7: {
-                var jsx$1;
-                if ((leftVal$1 instanceof $c_Lsmallstepsemantics_NumVal)) {
-                  var x4 = $as_Lsmallstepsemantics_NumVal(leftVal$1);
-                  var leftNum = x4.num$1;
+                var x$16;
+                if ((leftVal instanceof $c_Lsmallstepsemantics_NumVal)) {
+                  var x4$1 = $as_Lsmallstepsemantics_NumVal(leftVal);
+                  var leftNum = x4$1.num$1;
                   if ((rightVal instanceof $c_Lsmallstepsemantics_NumVal)) {
-                    var x5 = $as_Lsmallstepsemantics_NumVal(rightVal);
-                    var rightNum = x5.num$1;
-                    var jsx$1 = new $c_Lsmallstepsemantics_NumVal().init___I(((leftNum + rightNum) | 0));
+                    var x5$1 = $as_Lsmallstepsemantics_NumVal(rightVal);
+                    var rightNum = x5$1.num$1;
+                    var x$16 = new $c_Lsmallstepsemantics_NumVal().init___I(((leftNum + rightNum) | 0));
                     break matchEnd7
                   }
                 };
-                $m_s_sys_package$().error__T__sr_Nothing$(((("not both numbers: " + leftVal$1) + ", ") + rightVal))
+                $m_s_sys_package$().error__T__sr_Nothing$(((("not both numbers: " + leftVal) + ", ") + rightVal))
               };
-              return $as_Lsmallstepsemantics_Value(k$1$1.apply__O__O(jsx$1))
-            })
-          })($this, k$1, leftVal)))
-        })
-      })(this, right, env, k));
-      expr = left;
-      k = temp$k;
-      continue _interpret
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_Sub)) {
-      var x4$1 = $as_Lsmallstepsemantics_Sub(x1);
-      var left$2 = x4$1.left$1;
-      var right$2 = x4$1.right$1;
-      var temp$k$2 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2, right$2$1, env$2, k$2) {
-        return (function(leftVal$3$2) {
-          var leftVal$3 = $as_Lsmallstepsemantics_Value(leftVal$3$2);
-          return $m_Lsmallstepsemantics_Interpreter$().interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value(right$2$1, env$2, new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this$2, k$1$2, leftVal$4) {
-            return (function(rightVal$2$1) {
-              var rightVal$1 = $as_Lsmallstepsemantics_Value(rightVal$2$1);
-              matchEnd7$1: {
-                var jsx$2;
-                if ((leftVal$4 instanceof $c_Lsmallstepsemantics_NumVal)) {
-                  var x4$2 = $as_Lsmallstepsemantics_NumVal(leftVal$4);
-                  var leftNum$1 = x4$2.num$1;
-                  if ((rightVal$1 instanceof $c_Lsmallstepsemantics_NumVal)) {
-                    var x5$1 = $as_Lsmallstepsemantics_NumVal(rightVal$1);
-                    var rightNum$1 = x5$1.num$1;
-                    var jsx$2 = new $c_Lsmallstepsemantics_NumVal().init___I(((leftNum$1 - rightNum$1) | 0));
-                    break matchEnd7$1
-                  }
+              var temp$valStack$4 = new $c_sci_$colon$colon().init___O__sci_List(x$16, restVals);
+              contStack = restConts;
+              valStack = temp$valStack$4;
+              continue _interpret
+            }
+          };
+          $m_s_sys_package$().error__T__sr_Nothing$("unreachable; not enough values to add")
+        } else {
+          var x$17 = $m_Lsmallstepsemantics_SubCont$();
+          if ((x$17 === curCont)) {
+            var x1$5 = valStack;
+            if ((x1$5 instanceof $c_sci_$colon$colon)) {
+              var x2$5 = $as_sci_$colon$colon(x1$5);
+              var rightVal$2 = $as_Lsmallstepsemantics_Value(x2$5.head$5);
+              var p3$2 = x2$5.tl$5;
+              if ((p3$2 instanceof $c_sci_$colon$colon)) {
+                var x4$3 = $as_sci_$colon$colon(p3$2);
+                var leftVal$2 = $as_Lsmallstepsemantics_Value(x4$3.head$5);
+                var restVals$2 = x4$3.tl$5;
+                matchEnd7$1: {
+                  var x$19;
+                  if ((leftVal$2 instanceof $c_Lsmallstepsemantics_NumVal)) {
+                    var x4$4 = $as_Lsmallstepsemantics_NumVal(leftVal$2);
+                    var leftNum$1 = x4$4.num$1;
+                    if ((rightVal$2 instanceof $c_Lsmallstepsemantics_NumVal)) {
+                      var x5$2 = $as_Lsmallstepsemantics_NumVal(rightVal$2);
+                      var rightNum$1 = x5$2.num$1;
+                      var x$19 = new $c_Lsmallstepsemantics_NumVal().init___I(((leftNum$1 - rightNum$1) | 0));
+                      break matchEnd7$1
+                    }
+                  };
+                  $m_s_sys_package$().error__T__sr_Nothing$(((("not both numbers: " + leftVal$2) + ", ") + rightVal$2))
                 };
-                $m_s_sys_package$().error__T__sr_Nothing$(((("not both numbers: " + leftVal$4) + ", ") + rightVal$1))
-              };
-              return $as_Lsmallstepsemantics_Value(k$1$2.apply__O__O(jsx$2))
-            })
-          })(this$2, k$2, leftVal$3)))
-        })
-      })(this, right$2, env, k));
-      expr = left$2;
-      k = temp$k$2;
-      continue _interpret
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_Id)) {
-      var x5$2 = $as_Lsmallstepsemantics_Id(x1);
-      var name = x5$2.name$1;
-      return $as_Lsmallstepsemantics_Value(k.apply__O__O(env.e$1.getOrElse__O__F0__O(name, new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function(this$3$1, name$1) {
-        return (function() {
-          $m_s_sys_package$().error__T__sr_Nothing$(("free identifier: " + name$1))
-        })
-      })(this, name)))))
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_Fun)) {
-      var x6 = $as_Lsmallstepsemantics_Fun(x1);
-      var param = x6.param$1;
-      var body = x6.body$1;
-      return $as_Lsmallstepsemantics_Value(k.apply__O__O(new $c_Lsmallstepsemantics_CloVal().init___T__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(param, body, env)))
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_App)) {
-      var x7 = $as_Lsmallstepsemantics_App(x1);
-      var fun = x7.fun$1;
-      var arg = x7.arg$1;
-      var temp$k$3 = new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$4, arg$1, env$3, k$3) {
-        return (function(x0$1$2) {
-          var x0$1 = $as_Lsmallstepsemantics_Value(x0$1$2);
-          if ((x0$1 instanceof $c_Lsmallstepsemantics_CloVal)) {
-            var x2$1 = $as_Lsmallstepsemantics_CloVal(x0$1);
-            var param$1 = x2$1.param$1;
-            var body$1 = x2$1.body$1;
-            var cloEnv = x2$1.cloEnv$1;
-            return $m_Lsmallstepsemantics_Interpreter$().interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value(arg$1, env$3, new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this$3, body$2, cloEnv$1, param$2, k$1$3) {
-              return (function(argVal$2) {
-                var argVal = $as_Lsmallstepsemantics_Value(argVal$2);
-                return $m_Lsmallstepsemantics_Interpreter$().interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value(body$2, new $c_Lsmallstepsemantics_Environment().init___sci_Map(cloEnv$1.e$1.$$plus__T2__sci_Map(new $c_T2().init___O__O(param$2, argVal))), k$1$3)
-              })
-            })(this$4, body$1, cloEnv, param$1, k$3)))
-          } else if ((x0$1 instanceof $c_Lsmallstepsemantics_ContVal)) {
-            var x3$1 = $as_Lsmallstepsemantics_ContVal(x0$1);
-            var newK = x3$1.k$1;
-            return $m_Lsmallstepsemantics_Interpreter$().interpret__p1__Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment__F1__Lsmallstepsemantics_Value(arg$1, env$3, newK)
+                var temp$valStack$5 = new $c_sci_$colon$colon().init___O__sci_List(x$19, restVals$2);
+                contStack = restConts;
+                valStack = temp$valStack$5;
+                continue _interpret
+              }
+            };
+            $m_s_sys_package$().error__T__sr_Nothing$("unreachable; not enough values to subtract")
           } else {
-            $m_s_sys_package$().error__T__sr_Nothing$(("not a closure or continuation: " + x0$1))
+            var x$20 = $m_Lsmallstepsemantics_AppCont$();
+            if ((x$20 === curCont)) {
+              var x1$6 = valStack;
+              if ((x1$6 instanceof $c_sci_$colon$colon)) {
+                var x2$6 = $as_sci_$colon$colon(x1$6);
+                var argVal = $as_Lsmallstepsemantics_Value(x2$6.head$5);
+                var p3$3 = x2$6.tl$5;
+                if ((p3$3 instanceof $c_sci_$colon$colon)) {
+                  var x4$4$1 = $as_sci_$colon$colon(p3$3);
+                  var funVal = $as_Lsmallstepsemantics_Value(x4$4$1.head$5);
+                  var restVals$3 = x4$4$1.tl$5;
+                  if ((funVal instanceof $c_Lsmallstepsemantics_CloVal)) {
+                    var x2$7 = $as_Lsmallstepsemantics_CloVal(funVal);
+                    var param$2 = x2$7.param$1;
+                    var body$3 = x2$7.body$1;
+                    var cloEnv = x2$7.cloEnv$1;
+                    var x$20$2 = new $c_Lsmallstepsemantics_EvalCont().init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment(body$3, new $c_Lsmallstepsemantics_Environment().init___sci_Map(cloEnv.e$1.$$plus__T2__sci_Map(new $c_T2().init___O__O(param$2, argVal))));
+                    var temp$contStack$10 = new $c_sci_$colon$colon().init___O__sci_List(x$20$2, restConts);
+                    contStack = temp$contStack$10;
+                    valStack = restVals$3;
+                    continue _interpret
+                  } else if ((funVal instanceof $c_Lsmallstepsemantics_ContVal)) {
+                    var x3$2 = $as_Lsmallstepsemantics_ContVal(funVal);
+                    var newContStack = x3$2.contStack$1;
+                    var newValStack = x3$2.valStack$1;
+                    var temp$valStack$7 = new $c_sci_$colon$colon().init___O__sci_List(argVal, newValStack);
+                    contStack = newContStack;
+                    valStack = temp$valStack$7;
+                    continue _interpret
+                  } else {
+                    $m_s_sys_package$().error__T__sr_Nothing$(("not a closure or a continuation: " + funVal))
+                  }
+                }
+              };
+              $m_s_sys_package$().error__T__sr_Nothing$("unreachable; not enough values to apply")
+            } else {
+              throw new $c_s_MatchError().init___O(curCont)
+            }
           }
-        })
-      })(this, arg, env, k));
-      expr = fun;
-      k = temp$k$3;
-      continue _interpret
-    } else if ((x1 instanceof $c_Lsmallstepsemantics_Withcc)) {
-      var x8 = $as_Lsmallstepsemantics_Withcc(x1);
-      var name$2 = x8.name$1;
-      var body$2$1 = x8.body$1;
-      var jsx$3 = env.e$1;
-      var y = new $c_Lsmallstepsemantics_ContVal().init___F1(k);
-      var temp$env = new $c_Lsmallstepsemantics_Environment().init___sci_Map(jsx$3.$$plus__T2__sci_Map(new $c_T2().init___O__O(name$2, y)));
-      expr = body$2$1;
-      env = temp$env;
-      continue _interpret
+        }
+      }
     } else {
-      throw new $c_s_MatchError().init___O(x1)
+      var x$22 = $m_sci_Nil$();
+      if (x$22.equals__O__Z(x1)) {
+        var this$14 = valStack;
+        if (($f_sc_LinearSeqOptimized__length__I(this$14) === 1)) {
+          return $as_Lsmallstepsemantics_Value(valStack.head__O())
+        } else {
+          $m_s_sys_package$().error__T__sr_Nothing$("unreachable; too many result values")
+        }
+      } else {
+        throw new $c_s_MatchError().init___O(x1)
+      }
     }
   }
 });
@@ -9527,6 +9619,57 @@ var $d_Lsmallstepsemantics_Add = new $TypeData().initClass({
 });
 $c_Lsmallstepsemantics_Add.prototype.$classData = $d_Lsmallstepsemantics_Add;
 /** @constructor */
+function $c_Lsmallstepsemantics_AddCont$() {
+  $c_O.call(this)
+}
+$c_Lsmallstepsemantics_AddCont$.prototype = new $h_O();
+$c_Lsmallstepsemantics_AddCont$.prototype.constructor = $c_Lsmallstepsemantics_AddCont$;
+/** @constructor */
+function $h_Lsmallstepsemantics_AddCont$() {
+  /*<skip>*/
+}
+$h_Lsmallstepsemantics_AddCont$.prototype = $c_Lsmallstepsemantics_AddCont$.prototype;
+$c_Lsmallstepsemantics_AddCont$.prototype.init___ = (function() {
+  return this
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.productPrefix__T = (function() {
+  return "AddCont"
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.productArity__I = (function() {
+  return 0
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.productElement__I__O = (function(x$1) {
+  throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.toString__T = (function() {
+  return "AddCont"
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.hashCode__I = (function() {
+  return 515570515
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+var $d_Lsmallstepsemantics_AddCont$ = new $TypeData().initClass({
+  Lsmallstepsemantics_AddCont$: 0
+}, false, "smallstepsemantics.AddCont$", {
+  Lsmallstepsemantics_AddCont$: 1,
+  O: 1,
+  Lsmallstepsemantics_Continuation: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lsmallstepsemantics_AddCont$.prototype.$classData = $d_Lsmallstepsemantics_AddCont$;
+var $n_Lsmallstepsemantics_AddCont$ = (void 0);
+function $m_Lsmallstepsemantics_AddCont$() {
+  if ((!$n_Lsmallstepsemantics_AddCont$)) {
+    $n_Lsmallstepsemantics_AddCont$ = new $c_Lsmallstepsemantics_AddCont$().init___()
+  };
+  return $n_Lsmallstepsemantics_AddCont$
+}
+/** @constructor */
 function $c_Lsmallstepsemantics_App() {
   $c_O.call(this);
   this.fun$1 = null;
@@ -9614,6 +9757,57 @@ var $d_Lsmallstepsemantics_App = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lsmallstepsemantics_App.prototype.$classData = $d_Lsmallstepsemantics_App;
+/** @constructor */
+function $c_Lsmallstepsemantics_AppCont$() {
+  $c_O.call(this)
+}
+$c_Lsmallstepsemantics_AppCont$.prototype = new $h_O();
+$c_Lsmallstepsemantics_AppCont$.prototype.constructor = $c_Lsmallstepsemantics_AppCont$;
+/** @constructor */
+function $h_Lsmallstepsemantics_AppCont$() {
+  /*<skip>*/
+}
+$h_Lsmallstepsemantics_AppCont$.prototype = $c_Lsmallstepsemantics_AppCont$.prototype;
+$c_Lsmallstepsemantics_AppCont$.prototype.init___ = (function() {
+  return this
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.productPrefix__T = (function() {
+  return "AppCont"
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.productArity__I = (function() {
+  return 0
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.productElement__I__O = (function(x$1) {
+  throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.toString__T = (function() {
+  return "AppCont"
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.hashCode__I = (function() {
+  return 870202579
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+var $d_Lsmallstepsemantics_AppCont$ = new $TypeData().initClass({
+  Lsmallstepsemantics_AppCont$: 0
+}, false, "smallstepsemantics.AppCont$", {
+  Lsmallstepsemantics_AppCont$: 1,
+  O: 1,
+  Lsmallstepsemantics_Continuation: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lsmallstepsemantics_AppCont$.prototype.$classData = $d_Lsmallstepsemantics_AppCont$;
+var $n_Lsmallstepsemantics_AppCont$ = (void 0);
+function $m_Lsmallstepsemantics_AppCont$() {
+  if ((!$n_Lsmallstepsemantics_AppCont$)) {
+    $n_Lsmallstepsemantics_AppCont$ = new $c_Lsmallstepsemantics_AppCont$().init___()
+  };
+  return $n_Lsmallstepsemantics_AppCont$
+}
 /** @constructor */
 function $c_Lsmallstepsemantics_CloVal() {
   $c_O.call(this);
@@ -9716,7 +9910,8 @@ $c_Lsmallstepsemantics_CloVal.prototype.$classData = $d_Lsmallstepsemantics_CloV
 /** @constructor */
 function $c_Lsmallstepsemantics_ContVal() {
   $c_O.call(this);
-  this.k$1 = null
+  this.contStack$1 = null;
+  this.valStack$1 = null
 }
 $c_Lsmallstepsemantics_ContVal.prototype = new $h_O();
 $c_Lsmallstepsemantics_ContVal.prototype.constructor = $c_Lsmallstepsemantics_ContVal;
@@ -9729,16 +9924,22 @@ $c_Lsmallstepsemantics_ContVal.prototype.productPrefix__T = (function() {
   return "ContVal"
 });
 $c_Lsmallstepsemantics_ContVal.prototype.productArity__I = (function() {
-  return 1
+  return 2
 });
 $c_Lsmallstepsemantics_ContVal.prototype.equals__O__Z = (function(x$1) {
   if ((this === x$1)) {
     return true
   } else if ((x$1 instanceof $c_Lsmallstepsemantics_ContVal)) {
     var ContVal$1 = $as_Lsmallstepsemantics_ContVal(x$1);
-    var x = this.k$1;
-    var x$2 = ContVal$1.k$1;
-    return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
+    var x = this.contStack$1;
+    var x$2 = ContVal$1.contStack$1;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      var x$3 = this.valStack$1;
+      var x$4 = ContVal$1.valStack$1;
+      return ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      return false
+    }
   } else {
     return false
   }
@@ -9746,7 +9947,11 @@ $c_Lsmallstepsemantics_ContVal.prototype.equals__O__Z = (function(x$1) {
 $c_Lsmallstepsemantics_ContVal.prototype.productElement__I__O = (function(x$1) {
   switch (x$1) {
     case 0: {
-      return this.k$1;
+      return this.contStack$1;
+      break
+    }
+    case 1: {
+      return this.valStack$1;
       break
     }
     default: {
@@ -9757,8 +9962,9 @@ $c_Lsmallstepsemantics_ContVal.prototype.productElement__I__O = (function(x$1) {
 $c_Lsmallstepsemantics_ContVal.prototype.toString__T = (function() {
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
-$c_Lsmallstepsemantics_ContVal.prototype.init___F1 = (function(k) {
-  this.k$1 = k;
+$c_Lsmallstepsemantics_ContVal.prototype.init___sci_List__sci_List = (function(contStack, valStack) {
+  this.contStack$1 = contStack;
+  this.valStack$1 = valStack;
   return this
 });
 $c_Lsmallstepsemantics_ContVal.prototype.hashCode__I = (function() {
@@ -9789,6 +9995,94 @@ var $d_Lsmallstepsemantics_ContVal = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lsmallstepsemantics_ContVal.prototype.$classData = $d_Lsmallstepsemantics_ContVal;
+/** @constructor */
+function $c_Lsmallstepsemantics_EvalCont() {
+  $c_O.call(this);
+  this.expr$1 = null;
+  this.env$1 = null
+}
+$c_Lsmallstepsemantics_EvalCont.prototype = new $h_O();
+$c_Lsmallstepsemantics_EvalCont.prototype.constructor = $c_Lsmallstepsemantics_EvalCont;
+/** @constructor */
+function $h_Lsmallstepsemantics_EvalCont() {
+  /*<skip>*/
+}
+$h_Lsmallstepsemantics_EvalCont.prototype = $c_Lsmallstepsemantics_EvalCont.prototype;
+$c_Lsmallstepsemantics_EvalCont.prototype.init___Lsmallstepsemantics_Expression__Lsmallstepsemantics_Environment = (function(expr, env) {
+  this.expr$1 = expr;
+  this.env$1 = env;
+  return this
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.productPrefix__T = (function() {
+  return "EvalCont"
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.productArity__I = (function() {
+  return 2
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else if ((x$1 instanceof $c_Lsmallstepsemantics_EvalCont)) {
+    var EvalCont$1 = $as_Lsmallstepsemantics_EvalCont(x$1);
+    var x = this.expr$1;
+    var x$2 = EvalCont$1.expr$1;
+    if (((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))) {
+      var x$3 = this.env$1;
+      var x$4 = EvalCont$1.env$1;
+      return ((x$3 === null) ? (x$4 === null) : x$3.equals__O__Z(x$4))
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.productElement__I__O = (function(x$1) {
+  switch (x$1) {
+    case 0: {
+      return this.expr$1;
+      break
+    }
+    case 1: {
+      return this.env$1;
+      break
+    }
+    default: {
+      throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+    }
+  }
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__I(this, (-889275714))
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+function $as_Lsmallstepsemantics_EvalCont(obj) {
+  return (((obj instanceof $c_Lsmallstepsemantics_EvalCont) || (obj === null)) ? obj : $throwClassCastException(obj, "smallstepsemantics.EvalCont"))
+}
+function $isArrayOf_Lsmallstepsemantics_EvalCont(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lsmallstepsemantics_EvalCont)))
+}
+function $asArrayOf_Lsmallstepsemantics_EvalCont(obj, depth) {
+  return (($isArrayOf_Lsmallstepsemantics_EvalCont(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lsmallstepsemantics.EvalCont;", depth))
+}
+var $d_Lsmallstepsemantics_EvalCont = new $TypeData().initClass({
+  Lsmallstepsemantics_EvalCont: 0
+}, false, "smallstepsemantics.EvalCont", {
+  Lsmallstepsemantics_EvalCont: 1,
+  O: 1,
+  Lsmallstepsemantics_Continuation: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lsmallstepsemantics_EvalCont.prototype.$classData = $d_Lsmallstepsemantics_EvalCont;
 /** @constructor */
 function $c_Lsmallstepsemantics_Fun() {
   $c_O.call(this);
@@ -10187,6 +10481,57 @@ var $d_Lsmallstepsemantics_Sub = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lsmallstepsemantics_Sub.prototype.$classData = $d_Lsmallstepsemantics_Sub;
+/** @constructor */
+function $c_Lsmallstepsemantics_SubCont$() {
+  $c_O.call(this)
+}
+$c_Lsmallstepsemantics_SubCont$.prototype = new $h_O();
+$c_Lsmallstepsemantics_SubCont$.prototype.constructor = $c_Lsmallstepsemantics_SubCont$;
+/** @constructor */
+function $h_Lsmallstepsemantics_SubCont$() {
+  /*<skip>*/
+}
+$h_Lsmallstepsemantics_SubCont$.prototype = $c_Lsmallstepsemantics_SubCont$.prototype;
+$c_Lsmallstepsemantics_SubCont$.prototype.init___ = (function() {
+  return this
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.productPrefix__T = (function() {
+  return "SubCont"
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.productArity__I = (function() {
+  return 0
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.productElement__I__O = (function(x$1) {
+  throw new $c_jl_IndexOutOfBoundsException().init___T(("" + x$1))
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.toString__T = (function() {
+  return "SubCont"
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.hashCode__I = (function() {
+  return (-204383886)
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
+});
+var $d_Lsmallstepsemantics_SubCont$ = new $TypeData().initClass({
+  Lsmallstepsemantics_SubCont$: 0
+}, false, "smallstepsemantics.SubCont$", {
+  Lsmallstepsemantics_SubCont$: 1,
+  O: 1,
+  Lsmallstepsemantics_Continuation: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  s_Serializable: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lsmallstepsemantics_SubCont$.prototype.$classData = $d_Lsmallstepsemantics_SubCont$;
+var $n_Lsmallstepsemantics_SubCont$ = (void 0);
+function $m_Lsmallstepsemantics_SubCont$() {
+  if ((!$n_Lsmallstepsemantics_SubCont$)) {
+    $n_Lsmallstepsemantics_SubCont$ = new $c_Lsmallstepsemantics_SubCont$().init___()
+  };
+  return $n_Lsmallstepsemantics_SubCont$
+}
 /** @constructor */
 function $c_Lsmallstepsemantics_Withcc() {
   $c_O.call(this);
@@ -17344,6 +17689,15 @@ $c_sci_$colon$colon.prototype.init___O__sci_List = (function(head, tl) {
 $c_sci_$colon$colon.prototype.productIterator__sc_Iterator = (function() {
   return new $c_sr_ScalaRunTime$$anon$1().init___s_Product(this)
 });
+function $as_sci_$colon$colon(obj) {
+  return (((obj instanceof $c_sci_$colon$colon) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.$colon$colon"))
+}
+function $isArrayOf_sci_$colon$colon(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sci_$colon$colon)))
+}
+function $asArrayOf_sci_$colon$colon(obj, depth) {
+  return (($isArrayOf_sci_$colon$colon(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.immutable.$colon$colon;", depth))
+}
 var $d_sci_$colon$colon = new $TypeData().initClass({
   sci_$colon$colon: 0
 }, false, "scala.collection.immutable.$colon$colon", {
