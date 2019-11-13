@@ -1,5 +1,4 @@
 # Small-Step Semantics Generator for KFAE
-(Incomplete)
 A small-step semantics generator for KFAE (Continuations, Functions, Arithmetic Expressions).
 
 ## Run Online
