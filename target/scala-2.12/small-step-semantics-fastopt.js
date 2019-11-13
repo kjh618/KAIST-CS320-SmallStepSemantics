@@ -1909,7 +1909,7 @@ $c_Lsmallstepsemantics_Main$.prototype.init___ = (function() {
   return this
 });
 $c_Lsmallstepsemantics_Main$.prototype.runProgram__V = (function() {
-  this.output$1.value = this.liftedTree1$1__p1__T()
+  this.output$1.textContent = this.liftedTree1$1__p1__T()
 });
 $c_Lsmallstepsemantics_Main$.prototype.generateSmallStepSemantics__p1__T__T = (function(program) {
   $m_Lsmallstepsemantics_Interpreter$().run__T__T(program);
@@ -2025,7 +2025,7 @@ $c_Lsmallstepsemantics_SmallStepSemantics$.prototype.toString__T = (function() {
     };
     var contStackStr = $as_T(x0$1.$$und1$f);
     var valStackStr = $as_T(x0$1.$$und2$f);
-    var x = (("%-" + contStackStrMaxLength) + "s \u2016 %s");
+    var x = (("%-" + contStackStrMaxLength) + "s \u2016 %s ");
     var this$12 = new $c_sci_StringOps().init___T(x);
     var array = [contStackStr, valStackStr];
     var args = new $c_sjs_js_WrappedArray().init___sjs_js_Array(array);

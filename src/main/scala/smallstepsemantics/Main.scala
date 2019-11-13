@@ -6,16 +6,16 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 object Main {
   private val programInput = document.getElementById("programInput").asInstanceOf[dom.html.TextArea]
-  private val output = document.getElementById("output").asInstanceOf[dom.html.TextArea]
+  private val output = document.getElementById("output").asInstanceOf[dom.html.Paragraph]
 
   private def generateSmallStepSemantics(program: String): String = {
     Interpreter.run(program)
     SmallStepSemantics.toString
   }
-  
+
   @JSExportTopLevel("runProgram")
   def runProgram(): Unit = {
-    output.value = try generateSmallStepSemantics(programInput.value) catch {
+    output.textContent = try generateSmallStepSemantics(programInput.value) catch {
       case e: RuntimeException => e.getMessage
       case e: Throwable => s"unknown error: $e"
     }

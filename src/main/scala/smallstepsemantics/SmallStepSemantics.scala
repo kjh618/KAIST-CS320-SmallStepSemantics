@@ -21,7 +21,7 @@ object SmallStepSemantics {
     val stepStrs = steps.map(step => (step.contStackToString, step.valStackToString))
     val contStackStrMaxLength = stepStrs.maxBy(_._1.length)._1.length
     stepStrs.map({ case (contStackStr, valStackStr) =>
-      s"%-${contStackStrMaxLength}s ‖ %s".format(contStackStr, valStackStr)
+      s"%-${contStackStrMaxLength}s ‖ %s ".format(contStackStr, valStackStr)
     }).mkString("  ", "\n→ ", "")
   }
 }
